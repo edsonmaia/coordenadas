@@ -1,0 +1,287 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+/*
+    verde    #4caf50 #1b5e20
+    vermelho #f44336 #b71c1c
+    azul     #2196F3 #0d47a1
+    roxo     #9c27b0 #4a148c
+*/
+
+:root {
+    --principal : #b71c1c;
+    --secundaria: #f44336;
+
+    --cinza-escuro: #222;
+    --escuro: #191919;
+    --preto : #000;
+    --branco: #fff;
+    --verde-escuro: #1b5e20;
+
+
+    --sucesso: #4caf50;
+    --perigo: red;
+    --info: #2196F3; 
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    background-color: black;
+}
+
+main {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*  */
+header {
+    width: 215px;
+    background: black;
+    border-radius: 0 0 25px;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    display: flex;
+    align-items: top;
+}
+
+#logo {
+    width: 80px;
+    border-radius: 0% 0% 50%;
+    z-index: 1000;
+    padding: 10px;
+}
+
+figure {
+    width: 90px;
+    height: 90px;
+    z-index: 1000;
+}
+
+h1 {
+    font-size: 1rem;
+    z-index: 999;
+
+    padding: 12px;
+    color: #fff;
+}
+
+/* section #mapa */
+section {
+    font-size: 1.25rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.centro {
+    text-align: center;
+}
+
+h1, h2 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+h3 {
+    margin-top: 10px;
+}
+
+/* img #mapaMundi */
+#mapaMundi {
+    z-index:0;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 8px;
+    filter: opacity(0.95);
+}
+
+.linhas {
+    position: absolute;
+}
+
+#linhaDeLatitude {
+    background: rgba(255,0,0, 0.5);
+    width: 930px;
+    height: 4px;
+    top: 50%;
+    z-index: 1;
+}
+
+#linhaDeLongitude {
+    width: 4px;
+    height: 600px;
+    left: 50%;
+    background: rgba(0,0,255,0.5);
+    z-index:2;
+}
+
+/* div #caixa */
+#caixa {
+    background-color: #222;
+    width: 210px;
+    height: 535px;
+    border-radius: 16px;
+    color: #fff;
+
+    padding: 12px;
+    position: absolute;
+    top: 95px;
+    left: 5px;
+    z-index: 999;
+}
+
+#caixa h2 {
+    text-align: center;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+    background-color: #333;
+    padding: 5px;
+    border-radius: 12px;
+}
+
+#comandos {
+    font-size: 1rem;
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#lat {
+    z-index: 1;
+    color:rgba(255,0,0, 1);
+}
+
+#lon {
+    z-index: 1;
+    color: rgba(0,0,255, 1)
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem 0;
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+input, select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+}
+
+input {
+    font-size: 1rem;
+    width: 50%;
+    margin-right: 0.5rem;
+}
+
+.inputForm {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#dirLatitude {
+    color: #fff;
+    background: rgba(255,0,0, 0.5);
+}
+
+#dirLongitude {
+    color: #fff;
+    background: rgba(0,0,255, 0.5);
+}
+
+#btnJogar, #btnMoverLinhas {
+    background: var(--sucesso);
+    color: var(--branco);
+
+    font-size: 1.2rem;
+    margin-top: 10px;
+    height: 40px;
+    border-radius: 8px;
+    border: 2px solid var(--verde-escuro);
+    cursor: pointer;
+    transition: box-shadow .5s ease-in-out;
+}
+
+#btnJogar:hover{
+    box-shadow: inset 200px 0 0 #00000055;
+}
+
+#btnMoverLinhas {
+    background: var(--branco);
+    color: var(--preto);
+    border: 2px solid var(--escuro);
+    font-size: 1rem;
+    padding: 5px;
+}
+
+#divCards {
+    background: var(--escuro);
+    width: 200px;
+    padding: 10px;
+    border-radius: 12px;
+    position: absolute;
+    top: 25px;
+    right: 10px;
+}
+
+.cards {
+    background: #fff;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.cards h4 {
+    margin: 0.5rem 0;
+}
+
+#autor {
+    width: 100%;
+    margin-top: 10px;
+    background: #ccc;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Animar o input */
+@keyframes piscarPerigo {
+    to {
+        box-shadow: 0 0 15px var(--perigo);
+    }
+    from {
+    }
+}
+
+@keyframes piscarInfo {
+    to {
+        box-shadow: 0 0 15px var(--info);
+    }
+    from {
+    }
+}
+
+.animarPerigo {
+    animation: piscarPerigo 1s infinite alternate;
+}
+
+.animarInfo {
+    animation: piscarInfo 1s infinite alternate;
+}
