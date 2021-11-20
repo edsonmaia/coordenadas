@@ -110,13 +110,19 @@ h3 {
     filter: opacity(0.95);
 }
 
+.navios {
+    width: 25px;
+	z-index: 0;
+	position: absolute;
+}
+
 .linhas {
     position: absolute;
 }
 
 #linhaDeLatitude {
     background: rgba(255,0,0, 0.5);
-    width: 930px;
+    width: 930px; /* 930px */
     height: 4px;
     top: 50%;
     z-index: 1;
@@ -124,7 +130,7 @@ h3 {
 
 #linhaDeLongitude {
     width: 4px;
-    height: 600px;
+    height: 600px; /* 600px */
     left: 50%;
     background: rgba(0,0,255,0.5);
     z-index:2;
@@ -134,13 +140,13 @@ h3 {
 #caixa {
     background-color: #222;
     width: 210px;
-    height: 535px;
+    height: 555px;
     border-radius: 16px;
     color: #fff;
 
     padding: 12px;
     position: absolute;
-    top: 95px;
+    top: 75px;
     left: 5px;
     z-index: 999;
 }
@@ -154,13 +160,13 @@ h3 {
     border-radius: 12px;
 }
 
-#comandos {
+#missoes {
     font-size: 1rem;
-    margin: 1rem 0;
     display: flex;
     flex-direction: column;
 }
 
+/* linhas de latitude e longitude */
 #lat {
     z-index: 1;
     color:rgba(255,0,0, 1);
@@ -208,21 +214,29 @@ input {
     background: rgba(0,0,255, 0.5);
 }
 
-#btnJogar, #btnMoverLinhas {
-    background: var(--sucesso);
-    color: var(--branco);
-
+.botao {
     font-size: 1.2rem;
     margin-top: 10px;
     height: 40px;
     border-radius: 8px;
+    cursor: pointer;
+}
+
+.missoes {
+    width: 100%;
+    padding: 5px;
+}
+
+#btnJogar, #btnMoverLinhas {
+    background: var(--sucesso);
+    color: var(--branco);
     border: 2px solid var(--verde-escuro);
     cursor: pointer;
-    transition: box-shadow .5s ease-in-out;
+    transition: box-shadow .5s ease;
 }
 
 #btnJogar:hover{
-    box-shadow: inset 200px 0 0 #00000055;
+    box-shadow: inset 190px 0 0 #00000055;
 }
 
 #btnMoverLinhas {
@@ -239,7 +253,7 @@ input {
     padding: 10px;
     border-radius: 12px;
     position: absolute;
-    top: 25px;
+    top: 30px;
     right: 10px;
 }
 
@@ -284,4 +298,57 @@ input {
 
 .animarInfo {
     animation: piscarInfo 1s infinite alternate;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: rgba(0,0,0,0.8);
+    z-index: 99999;
+    opacity:0;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+    pointer-events: none;
+}
+
+.modal:target {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal > div {
+    width: 300px;
+    position: relative;
+    margin: 10% auto;
+    border-radius: 8px;
+    padding: 15px 20px;
+    background: #fff;
+}
+
+.modal h2 {
+    margin-bottom: 0.75rem;
+}
+
+.modal p {
+    font-size: 1.5rem;
+}
+
+.fechar {
+    text-decoration: none;
+    position: absolute;
+    width: 30px;
+    right: -15px;
+    top: -20px;
+    text-align: center;
+    line-height: 32px;
+    margin-top: 5px;
+    background: #ff4545;
+    border-radius: 50%;
+    font-size: 1.25rem;
+    color: #fff;
 }

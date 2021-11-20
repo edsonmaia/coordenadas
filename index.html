@@ -11,7 +11,7 @@
 <body>
 <main class='tela-principal'>
 
-    <header>
+    <header id='topo'>
         <figure>
             <img id='logo' src="images/rosa-ventos.webp" alt="logo" />
         </figure>
@@ -48,17 +48,22 @@
                         <option value="O">W - Oeste</option>
                     </select>
                 </div>
-                <button id='btnJogar'>Jogar</button>
+                <button class='botao' id='btnJogar'>Jogar</button>
             </div>
             <p id='posicoes'>
-                Lat.: <span id='posicaoY'></span> Lon.: <span id='posicaoX'></span>  
+                Lat.: <span id='posicaoY'></span> Lon.: <span id='posicaoX'></span>
+                <p><button class='botao' id='btnMoverLinhas'>90°N 180°W</button></p>
             </p>
         </div>
-        <div id='comandos'>
-            <h3>Comandos</h3>
-                <p><button id='btnMoverLinhas'>90°N 180°W</button></p>
+        <h3>Missões</h3>
+        <div id='missoes'>
+            <p><button class='botao missoes' id='btnMissao1'>1</button></p>
+            <p><button class='botao missoes' id='btnMissao2'>2</button></p>
+            <p><button class='botao missoes' id='btnMissao3'>3</button></p>
+            <p><button class='botao missoes' id='btnMissao4'>4</button></p>
         </div>
     </div>
+
     <!-- PRINCIPAL -->
     <section id='mapa'>
         <img id='mapaMundi' src="images/mapa-das-coordenadas.png" alt="Mapa do mundo" />
@@ -77,6 +82,15 @@
             Produzido por Edson Maia &copy; 2021
         </div>
     </article>
+
+    <!-- Janela Modal  -->
+    <div id="abrirModal" class="modal">
+        <div>
+            <a href="#fechar" title="Fechar" class="fechar">x</a>
+            <h3>Coordenada</h3>
+            <p id='coordenadasDaJogada'></p>
+        </div>
+    </div>
 
 </main>
 <script src="js/main.js" defer></script>

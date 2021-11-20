@@ -10,6 +10,11 @@ let lon = document.querySelector('#lon')
 let direcaoLat = document.querySelector('#direcaoLat')
 let direcaoLon = document.querySelector('#direcaoLon')
 
+function abrirModal(nLa, dLa, nLo, dLo) {
+    location.href="#abrirModal"
+	coordenadasDaJogada.innerHTML = `${nLa}°${dLa} ${nLo}°${dLo}`
+}
+
 function verificarFirefox() {
 	// verificar se e o Firefox
 	var sBrowser, sUsrAg = navigator.userAgent
@@ -77,35 +82,35 @@ btnJogar.addEventListener('click', () => {
 
     mudarLatitude(nLatitude, dirLatitude)
 	mudarLongitude(nLongitude, dirLongitude)
+
+	abrirModal(latitudeInformada, dirLatitude, longitudeInformada, dirLongitude)
 })
 
-let nLatitude  = ''
-let nLongitude = ''
+function obterIndiceLatitude(latitudeInformada) {
+		// indice usado para mover a div para o Norte (-) ou para o Sul (+)
+		let indiceLa = 2.4
+		if (latitudeInformada < 30) {
+			indiceLa = 2.5
+		} else if (latitudeInformada <= 40) {
+			indiceLa = 2.6
+		} else if (latitudeInformada <= 50) {
+			indiceLa = 2.7
+		} else if (latitudeInformada <= 60) {
+			indiceLa = 2.8
+		} else if (latitudeInformada <= 70) {
+			indiceLa = 2.9
+		} else if (latitudeInformada <= 90) {
+			indiceLa = 3.1
+		} else if (latitudeInformada > 90 || latitudeInformada < 0) {
+			console.log('Latitude inválida')
+			return
+		} else {
+			indiceLa = 2.4
+		}
+		return indiceLa
+}
 
-function moverConformeDirecao(latitudeInformada, longitudeInformada, dirLatitude, dirLongitude) {
-
-	// indice usado para mover a div para o Norte (-) ou para o Sul (+)
-    let indiceLa = 2.4
-
-    if (latitudeInformada < 30) {
-        indiceLa = 2.5
-    } else if (latitudeInformada <= 40) {
-        indiceLa = 2.6
-    } else if (latitudeInformada <= 50) {
-        indiceLa = 2.7
-    } else if (latitudeInformada <= 60) {
-        indiceLa = 2.8
-    } else if (latitudeInformada <= 70) {
-        indiceLa = 2.9
-    } else if (latitudeInformada <= 90) {
-        indiceLa = 3.1
-    } else if (latitudeInformada > 90 || latitudeInformada < 0) {
-        console.log('Latitude inválida')
-        return
-    } else {
-        indiceLa = 2.4
-    }
-
+function obterIndiceLongitude(longitudeInformada) {
 	// indice usado para mover a div para o Leste (+) ou para o Oeste (-)
     let indiceLo = 2.4
 	longitudeInformada >= 120 && dirLongitude == 'E'  ? indiceLo = 2.35 : ''
@@ -114,6 +119,16 @@ function moverConformeDirecao(latitudeInformada, longitudeInformada, dirLatitude
         console.log('Longitude inválida')
         return
     }
+	return indiceLo
+}
+
+let nLatitude  = ''
+let nLongitude = ''
+
+function moverConformeDirecao(latitudeInformada, longitudeInformada, dirLatitude, dirLongitude) {
+
+	indiceLa = obterIndiceLatitude(latitudeInformada)
+	indiceLo = obterIndiceLongitude(longitudeInformada)
 
 	dirLatitude == 'N' ? nLatitude = (equador - latitudeInformada*indiceLa) : nLatitude = (equador + latitudeInformada*indiceLa)
 	dirLongitude == 'E' ? nLongitude = (greenwich + longitudeInformada*indiceLo) : nLongitude = (greenwich - longitudeInformada*indiceLo)
@@ -170,13 +185,9 @@ function desenharNavio(top, left, cor) {
 	const navio = document.createElement('img')
 	sectionMapa.appendChild(navio)
 	navio.setAttribute('src', `images/navio-${cor}.png`)
-	navio.setAttribute('width', '25px')
-	navio.style.zIndex = '0'
-	navio.style.position = 'absolute'
-
+	navio.classList.add('navios')
 	navio.style.top = (top-2.5)+'px'
 	navio.style.left = (left-12.5)+'px'
-	
 }
 
 // NAVIOS latitude, longitude, cor
