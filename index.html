@@ -11,14 +11,14 @@
 <body>
 <main class='tela-principal'>
 
-    <header id='topo'>
-        <figure>
-            <img id='logo' src="images/rosa-ventos.webp" alt="logo" />
-        </figure>
-        <h1 class=''>Jogo das<br>Coordenadas<br>Geográficas</h1>
-    </header>
+    <aside id='caixa'>
 
-    <div id='caixa'>
+        <header id='topo'>
+            <figure>
+                <img id='logo' src="images/rosa-dos-ventos.png" alt="logo" />
+            </figure>
+            <h1 class=''>Jogo das<br>Coordenadas<br>Geográficas</h1>
+        </header>
 
         <h2>Coordenadas</h2>
         <div>
@@ -62,20 +62,22 @@
             <p><button class='botao missoes' id='btnMissao3'>3</button></p>
             <p><button class='botao missoes' id='btnMissao4'>4</button></p>
         </div>
-    </div>
+    </aside>
 
     <!-- PRINCIPAL -->
     <section id='mapa'>
-        <img id='mapaMundi' src="images/mapa-das-coordenadas.png" alt="Mapa do mundo" />
         <div class='linhas animarPerigo' id='linhaDeLatitude'></div>
         <div class='linhas animarInfo' id='linhaDeLongitude'></div>
+        <img id='mapaMundi' src="images/mapa-das-coordenadas.png" alt="Mapa do mundo" />
     </section>
     
-    <article id='divCards'>
+    <article id='divIntrucoes'>
 
         <div id='card' class='cards'>
             <h4>Instrução</h4>
-            <p>Recebemos a informação de que existe um navio suspeito navegando no Atlântico Norte.</p>
+            <p>Nos Oceanos e Mares temos navios Comerciais, Militares e de Turismo. Mas, também temos navios que praticam a Pesca Ilegal e a Pirataria.</p>
+            <p>Escolha uma missão e use as Coordenadas Geográficas para localizar os navios de Pesca Ilegal e de Pirataria.</p>
+            <p>Saudações Geográficas e até a próxima missão!</p>
         </div>
         
         <div id='autor'>

@@ -33,56 +33,85 @@
 body {
     width: 100%;
     height: 100%;
-    background-color: black;
+    background-color:  var(--escuro);
 }
 
 main {
-    width: 100vw;
-    height: 100vh;
+    overflow: hidden;
+    width: 1366px;
+    height: 643px;
     display: flex;
+    flex-direction: row;
+
     align-items: center;
     justify-content: center;
 }
 
-/*  */
-header {
-    width: 215px;
-    background: black;
-    border-radius: 0 0 25px;
-
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    display: flex;
-    align-items: top;
-}
-
-#logo {
-    width: 80px;
-    border-radius: 0% 0% 50%;
-    z-index: 1000;
-    padding: 10px;
-}
-
-figure {
-    width: 90px;
-    height: 90px;
-    z-index: 1000;
-}
-
 h1 {
-    font-size: 1rem;
+    font-size: 0.95rem;
     z-index: 999;
 
     padding: 12px;
     color: #fff;
 }
 
+/* aside #caixa LOGO FORM, COMANDOS */
+#caixa {
+    background-color: var(--escuro);
+    width: 233px;
+    padding: 10px;
+    height: 100%;
+    color: #fff;
+    z-index: 999;
+}
+
+#caixa h2 {
+    text-align: center;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+    background-color: #333;
+    padding: 5px;
+    border-radius: 12px;
+}
+
+/* area com os botoes de missoes */
+#missoes {
+    font-size: 1rem;
+    display: flex;
+    flex-direction: row;
+}
+
+/* topo com logo  */
+header {
+    border-radius: 38px;
+    background: black;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+figure {
+    margin-left: 4px;
+    width: 75px;
+    height: 75px;
+    border-radius: 0 0 25px;
+    background-color: #fff;
+    border-radius: 50%;
+    z-index: 1000;
+}
+
+/* imagem */
+#logo {
+    width: 75px;
+    height: 75px;
+    z-index: 1000;
+}
+
 /* section #mapa */
 section {
     font-size: 1.25rem;
 
+    /* width: 900px; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -104,7 +133,7 @@ h3 {
 /* img #mapaMundi */
 #mapaMundi {
     z-index:0;
-    width: 100%;
+    /* width: 100%; */
     cursor: pointer;
     border-radius: 8px;
     filter: opacity(0.95);
@@ -116,67 +145,35 @@ h3 {
 	position: absolute;
 }
 
+.icones {
+    position: absolute;
+    z-index: 2000;
+}
+
 .linhas {
     position: absolute;
+    z-index: 1;
 }
 
 #linhaDeLatitude {
     background: rgba(255,0,0, 0.5);
     width: 930px; /* 930px */
     height: 4px;
-    top: 50%;
+    top: 323px;
     z-index: 1;
 }
 
 #linhaDeLongitude {
     width: 4px;
     height: 600px; /* 600px */
-    left: 50%;
+    left: 695px;
     background: rgba(0,0,255,0.5);
-    z-index:2;
+    z-index:1;
 }
 
-/* div #caixa */
-#caixa {
-    background-color: #222;
-    width: 210px;
-    height: 555px;
-    border-radius: 16px;
-    color: #fff;
+/* DENTRO DA CAIXA */
 
-    padding: 12px;
-    position: absolute;
-    top: 75px;
-    left: 5px;
-    z-index: 999;
-}
-
-#caixa h2 {
-    text-align: center;
-    font-size: 1rem;
-    margin-bottom: 0.25rem;
-    background-color: #333;
-    padding: 5px;
-    border-radius: 12px;
-}
-
-#missoes {
-    font-size: 1rem;
-    display: flex;
-    flex-direction: column;
-}
-
-/* linhas de latitude e longitude */
-#lat {
-    z-index: 1;
-    color:rgba(255,0,0, 1);
-}
-
-#lon {
-    z-index: 1;
-    color: rgba(0,0,255, 1)
-}
-
+/* FORMULARIO */
 .form-group {
     display: flex;
     flex-direction: column;
@@ -217,14 +214,21 @@ input {
 .botao {
     font-size: 1.2rem;
     margin-top: 10px;
+    min-width: 50px;
     height: 40px;
     border-radius: 8px;
     cursor: pointer;
+    color: #fff;
+    border: 1px solid #ccc;
+    font-weight: bold;
 }
 
 .missoes {
     width: 100%;
-    padding: 5px;
+}
+
+#missoes p {
+    margin-right: 5px;
 }
 
 #btnJogar, #btnMoverLinhas {
@@ -236,7 +240,7 @@ input {
 }
 
 #btnJogar:hover{
-    box-shadow: inset 190px 0 0 #00000055;
+    box-shadow: inset 210px 0 0 #00000055;
 }
 
 #btnMoverLinhas {
@@ -247,14 +251,28 @@ input {
     padding: 5px;
 }
 
-#divCards {
+#btnMissao1 {
+    background-color: green;
+}
+
+#btnMissao2 {
+    background-color: orangered;
+}
+
+#btnMissao3 {
+    background-color: yellow;
+    color: #222;
+}
+
+#btnMissao4 {
+    background-color: purple;
+}
+
+#divIntrucoes {
     background: var(--escuro);
-    width: 200px;
+    width: 233px;
+    height: 100%;
     padding: 10px;
-    border-radius: 12px;
-    position: absolute;
-    top: 30px;
-    right: 10px;
 }
 
 .cards {

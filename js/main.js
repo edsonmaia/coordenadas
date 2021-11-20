@@ -1,14 +1,12 @@
-let linhaDeLatitude = document.querySelector('#linhaDeLatitude')
+let linhaDeLatitude  = document.querySelector('#linhaDeLatitude')
 let linhaDeLongitude = document.querySelector('#linhaDeLongitude')
 let sectionMapa = document.querySelector("#mapa")
 
+// aside #caixa
 let divCaixa = document.querySelector('#caixa')
 let divCoordenadas = document.querySelector('#coordenadas')
 let lat = document.querySelector('#lat')
 let lon = document.querySelector('#lon')
-
-let direcaoLat = document.querySelector('#direcaoLat')
-let direcaoLon = document.querySelector('#direcaoLon')
 
 function abrirModal(nLa, dLa, nLo, dLo) {
     location.href="#abrirModal"
@@ -16,19 +14,22 @@ function abrirModal(nLa, dLa, nLo, dLo) {
 }
 
 function verificarFirefox() {
-	// verificar se e o Firefox
-	var sBrowser, sUsrAg = navigator.userAgent
-	if(sUsrAg.indexOf("Firefox") > -1) {
-		return sBrowser = "Firefox"
-	}
+    // verificar se e o Firefox
+    var browser
+	var sUsrAg = navigator.userAgent
+    if(sUsrAg.indexOf("Firefox") > -1) {
+        return browser = "Firefox"
+    }
 }
 
-let equador = 0
-let greenwich = window.innerWidth/2
-
+let equador = (window.innerHeight)/2
 // verifica se e o firefox se for adiciona +5 na medida do equador
 let isFirefox = verificarFirefox()
-isFirefox == 'Firefox' ? equador = (window.innerHeight+3)/2 : equador = window.innerHeight/2
+isFirefox == 'Firefox' ? equador = (window.innerHeight+2.5)/2 : equador = window.innerHeight/2
+
+let greenwich = window.innerWidth/2
+
+// alert(equador) // 328.5 e 321.5
 
 let posicaoY = document.querySelector('#posicaoY')
 let posicaoX = document.querySelector('#posicaoX')
@@ -47,31 +48,31 @@ const pegarPosicao = mapa.addEventListener('click', (evento) => {
 })
 
 function mudarLatitude(posY, dLa) {
-    linhaDeLatitude.style.top = posY+"px"
+	let firefox = verificarFirefox()
+	let posicao = (posY+7)
+	firefox == 'Firefox' ? linhaDeLatitude.style.top = posicao+"px"	: linhaDeLatitude.style.top = posY+"px"
 	let dirLat = dLa
 }
 
 function mudarLongitude(posX, dLo) {
-    linhaDeLongitude.style.left = posX+"px"
+	let firefox = verificarFirefox()
+	let posicao = ''
+	if(firefox == 'Firefox') {
+		posicao = (posX+13)
+		linhaDeLongitude.style.left = posicao+"px"
+	} else {
+		posicao = (posX+12.5)
+		linhaDeLongitude.style.left = posicao+"px"
+	}
 	let dirLon = dLo
 }
 
-function caixaDescritiva() {
-    let divisoria = document.createElement('div')
-    mapa.appendChild(divisoria)
-    divisoria.innerHTML = 'Caixa descritiva'
-}
-
-const btnMoverLinhas = document.querySelector('#btnMoverLinhas')
-
-btnMoverLinhas.addEventListener("click", () => {
-    mudarLatitude(53, "N")
-    mudarLongitude(255, "E")
+const btnMoverLinhas = document.querySelector('#btnMoverLinhas').addEventListener("click", () => {
+    mudarLatitude(47, "N")
+    mudarLongitude(266, "E")
 })
 
-const btnJogar = document.querySelector('#btnJogar')
-
-btnJogar.addEventListener('click', () => {
+const btnJogar = document.querySelector('#btnJogar').addEventListener('click', () => {
     /* INPUTS */
     const latitudeInformada  = document.querySelector('#latitudeInformada').value
     const longitudeInformada = document.querySelector('#longitudeInformada').value
@@ -83,15 +84,16 @@ btnJogar.addEventListener('click', () => {
     mudarLatitude(nLatitude, dirLatitude)
 	mudarLongitude(nLongitude, dirLongitude)
 
-	abrirModal(latitudeInformada, dirLatitude, longitudeInformada, dirLongitude)
+	//abrirModal(latitudeInformada, dirLatitude, longitudeInformada, dirLongitude)
+
 })
 
 function obterIndiceLatitude(latitudeInformada) {
 		// indice usado para mover a div para o Norte (-) ou para o Sul (+)
 		let indiceLa = 2.4
-		if (latitudeInformada < 30) {
+		if (latitudeInformada <= 20) {
 			indiceLa = 2.5
-		} else if (latitudeInformada <= 40) {
+		} else if (latitudeInformada <= 30) {
 			indiceLa = 2.6
 		} else if (latitudeInformada <= 50) {
 			indiceLa = 2.7
@@ -110,7 +112,7 @@ function obterIndiceLatitude(latitudeInformada) {
 		return indiceLa
 }
 
-function obterIndiceLongitude(longitudeInformada) {
+function obterIndiceLongitude(longitudeInformada, dirLongitude) {
 	// indice usado para mover a div para o Leste (+) ou para o Oeste (-)
     let indiceLo = 2.4
 	longitudeInformada >= 120 && dirLongitude == 'E'  ? indiceLo = 2.35 : ''
@@ -128,57 +130,19 @@ let nLongitude = ''
 function moverConformeDirecao(latitudeInformada, longitudeInformada, dirLatitude, dirLongitude) {
 
 	indiceLa = obterIndiceLatitude(latitudeInformada)
-	indiceLo = obterIndiceLongitude(longitudeInformada)
+	indiceLo = obterIndiceLongitude(longitudeInformada, dirLongitude)
 
-	dirLatitude == 'N' ? nLatitude = (equador - latitudeInformada*indiceLa) : nLatitude = (equador + latitudeInformada*indiceLa)
+	dirLatitude == 'N' ? nLatitude = ((equador-5) - latitudeInformada*indiceLa) : nLatitude = ((equador-5) + latitudeInformada*indiceLa)
 	dirLongitude == 'E' ? nLongitude = (greenwich + longitudeInformada*indiceLo) : nLongitude = (greenwich - longitudeInformada*indiceLo)
 }
 
-// POSICOES LATITUDES E LONGITUDES NO MAPA
-const posicoesLatitudes = {	
-	"90N": 52,
-	"80N": 79,
-	"70N": 126,
-	"60N": 162,
-	"50N": 195,
-	"40N": 224,
-	"30N": 249,
-	"20N": 275,
-	"10N": 305,
-	"0N" : 330,
-	"0S" : 330,
-	"10S": 357,
-	"20S": 385,
-	"30S": 412,
-	"40S": 438,
-	"50S": 467,
-	"60S": 499,
-	"70S": 535,
-	"80S": 582,
-	"90S": 608
-}
-
-const posicoesLongitudes = {
-	"180O": 253,
-	"160O": 300,
-	"140O": 348,
-	"120O": 395,
-	"100O": 443,
-	"80O" : 490,
-	"60O" : 538,
-	"40O" : 586,
-	"20O" : 633,
-	"0O"  : 681,
-	"0E"  : 681,
-	"20E" : 729,
-	"40E" : 777,
-	"60E" : 824,
-	"80E" : 872,
-	"100E": 920,
-	"120E": 967,
-	"140E": 1015,
-	"160E": 1062,
-	"180E": 1110 
+function desenharIcone(top, left, tipo) {
+	const icone = document.createElement('img')
+	sectionMapa.appendChild(icone)
+	icone.setAttribute('src', `images/icon-${tipo}.png`)
+	icone.classList.add('icones')
+	icone.style.top = (top-12.5)+'px'
+	icone.style.left = (left-12.5)+'px'
 }
 
 function desenharNavio(top, left, cor) {
@@ -186,84 +150,102 @@ function desenharNavio(top, left, cor) {
 	sectionMapa.appendChild(navio)
 	navio.setAttribute('src', `images/navio-${cor}.png`)
 	navio.classList.add('navios')
-	navio.style.top = (top-2.5)+'px'
-	navio.style.left = (left-12.5)+'px'
+
+	// verifica se e o firefox se for adiciona +5 na medida do equador
+	let firefox = verificarFirefox()
+
+	if(firefox == 'Firefox') {
+		navio.style.top = (top-9)+'px'
+	} else {
+		navio.style.top = (top-11)+'px'
+	}
+	
+	navio.style.left = (left)+'px'
 }
+
+// ICONES latitude, longitude, tipo
+//desenharIcone(195, 587, 'turismo')
 
 // NAVIOS latitude, longitude, cor
 
-// NORTE OESTE ATLANTICO N
-desenharNavio(127, 539, 'green') // EXTRA
+// ATLANTICO
+desenharNavio(equador, greenwich, 'green') // 0 NAVIO CENTRAL
+// NAVIO OESTE ATLANTICO
+desenharNavio(equador, 585, 'green') // 1
 
-desenharNavio(195, 587, 'green')
-desenharNavio(305, 587, 'green')
-desenharNavio(277, 538, 'green')
-desenharNavio(163, 634, 'green')
-desenharNavio(249, 634, 'green')
+// NORTE OESTE ATLANTICO N
+desenharNavio(305, 587, 'green') // 2
+desenharNavio(277, 538, 'green') // 3
+desenharNavio(249, 634, 'green') // 4
+desenharNavio(210, greenwich, 'green') // 5
+desenharNavio(195, 587, 'green') // 6
+desenharNavio(162, greenwich, 'green') // 7
+desenharNavio(163, 634, 'green') // 8
+desenharNavio(127, 539, 'green') // 9 EXTRA
 
 // NORTE OESTE PACIFICO N
-desenharNavio(196, 301, 'green')
-desenharNavio(250, 395, 'green')
-desenharNavio(305, 443, 'green')
-desenharNavio(224, 349, 'green')
-desenharNavio(278, 301, 'green')
+desenharNavio(equador, 299, 'green') // 10
+desenharNavio(305, 443, 'green') // 11
+desenharNavio(278, 301, 'green') // 12
+desenharNavio(250, 395, 'green') // 13
+desenharNavio(224, 349, 'green') // 14
+desenharNavio(196, 301, 'green') // 15
 
-// NAVIO CENTRAL
-desenharNavio(equador, greenwich, 'rose')
-// NORTE OESTE PACIFICO
-desenharNavio(equador, 299, 'rose')
-// NAVIO OESTE ATLANTICO
-desenharNavio(equador, 585, 'rose')
-// NAVIO LESTE INDICO
-desenharNavio(equador, 873, 'rose')
-// NAVIO LESTE PACIFICO
-desenharNavio(equador, 1062, 'rose')
-/////
-
-// NORTE LESTE 'MARES'
-desenharNavio(80, 778, 'orange')
-desenharNavio(80, 873, 'orange')
-desenharNavio(250, 729, 'orange')
-desenharNavio(223, 729, 'orange')
-desenharNavio(125, 729, 'orange')
-
-// NORTE LESTE INDICO E PACIFICO
-desenharNavio(223, 1015, 'orange') // PACIFICO NORTE
-desenharNavio(250, 1065, 'orange') // PACIFICO NORTE
-desenharNavio(276, 777, 'orange') // MAR VERMELHO
-desenharNavio(305, 825, 'orange') // INDICO NORTE
-desenharNavio(305, 968, 'orange') // PACIFICO NORTE
-
-
-// GREENWICH
-desenharNavio(162, greenwich, 'rose')
-desenharNavio(210, greenwich, 'rose')
-
-desenharNavio(385, greenwich, 'rose')
-desenharNavio(535, greenwich, 'rose')
-
-// INDICO E PACIFICO SUL
-desenharNavio(356, 920, 'purple')
-desenharNavio(356, 1017, 'purple')
-desenharNavio(383, 826, 'purple')
-desenharNavio(411, 1063, 'purple')
-desenharNavio(411, 777, 'purple')
-desenharNavio(437, 730, 'purple')
-desenharNavio(438, 968, 'purple')
-desenharNavio(438, 1112, 'purple')
-desenharNavio(467, 1063, 'purple')
-desenharNavio(498, 873, 'purple')
+////////////////
+desenharNavio(equador, 873, 'orange')  // 16 NAVIO LESTE INDICO
+desenharNavio(equador, 1062, 'orange') // 17 NAVIO LESTE PACIFICO
+// NORTE LESTE 'MARES' + INDICO E PACIFICO
+desenharNavio(305, 825, 'orange')  // 18 INDICO NORTE
+desenharNavio(305, 968, 'orange')  // 19 PACIFICO NORTE
+desenharNavio(276, 777, 'orange')  // 20 MAR VERMELHO
+desenharNavio(250, 729, 'orange')  // 21
+desenharNavio(250, 1065, 'orange') // 22 PACIFICO NORTE
+desenharNavio(223, 729, 'orange')  // 23
+desenharNavio(223, 1015, 'orange') // 24 PACIFICO NORTE
+desenharNavio(125, 729, 'orange')  // 25
+desenharNavio(80, 778, 'orange')   // 26
+desenharNavio(80, 873, 'orange')   // 27
 
 // SUL OESTE ATLANTICO SUL
-desenharNavio(357, 633, 'gold')
-desenharNavio(384, 586, 'gold')
-desenharNavio(412, 634, 'gold')
-desenharNavio(467, 538, 'gold')
-desenharNavio(439, 538, 'gold')
+desenharNavio(357, 633, 'gold') // 28
+desenharNavio(385, greenwich, 'gold') // 29
+desenharNavio(384, 586, 'gold') // 30
+desenharNavio(412, 634, 'gold') // 31
+desenharNavio(439, 538, 'gold') // 32
+desenharNavio(467, 538, 'gold') // 33
+desenharNavio(535, greenwich, 'gold') // 34
 
 // SUL OESTE PACIFICO SUL
-desenharNavio(356, 491, 'gold')
-desenharNavio(384, 324, 'gold')
-desenharNavio(384, 442, 'gold')
-desenharNavio(439, 349, 'gold')
-desenharNavio(500, 397, 'gold')
+desenharNavio(356, 491, 'gold') // 35
+desenharNavio(384, 442, 'gold') // 36
+desenharNavio(384, 324, 'gold') // 37
+desenharNavio(439, 349, 'gold') // 38
+desenharNavio(500, 397, 'gold') // 39
+
+// INDICO E PACIFICO SUL
+desenharNavio(356, 920, 'purple')  // 40
+desenharNavio(356, 1017, 'purple') // 41
+desenharNavio(383, 826, 'purple')  // 42
+desenharNavio(411, 777, 'purple')  // 43
+desenharNavio(411, 1063, 'purple') // 44
+
+desenharNavio(437, 730, 'purple')  // 45 ATLANTICO SUL LIMITE COM O INDICO
+
+desenharNavio(438, 968, 'purple')  // 46
+desenharNavio(438, 1112, 'purple') // 47
+desenharNavio(467, 1063, 'purple') // 48
+desenharNavio(498, 873, 'purple')  // 49
+
+/*
+desenharIcone(equador, 300, 'comercial')
+	desenharIcone(equador, 400, 'militar')
+	desenharIcone(equador, 500, 'turismo')
+	desenharIcone(equador, 600, 'pirataria')
+	desenharIcone(equador, 700, 'pesca')
+*/
+
+function exibirCard() {
+    let divisoria = document.createElement('div')
+    mapa.appendChild(divisoria)
+    divisoria.innerHTML = 'Caixa descritiva'
+}
