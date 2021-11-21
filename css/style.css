@@ -79,6 +79,7 @@ h1 {
     font-size: 1rem;
     display: flex;
     flex-direction: row;
+    gap: 5px;
 }
 
 /* topo com logo  */
@@ -150,6 +151,11 @@ h3 {
     z-index: 2000;
 }
 
+.icone-menor {
+    width: 16px;
+    height: 16px;
+}
+
 .linhas {
     position: absolute;
     z-index: 1;
@@ -188,12 +194,18 @@ input, select {
     padding: 10px;
     border-radius: 8px;
     border: 1px solid transparent;
+    cursor: pointer;
 }
 
 input {
     font-size: 1rem;
     width: 50%;
     margin-right: 0.5rem;
+}
+
+/* sombra nos inputs, selects e buttons */
+input:hover, input:focus, select:hover, select:focus, button:hover, button:focus {
+    box-shadow: 0 0 10px cyan;
 }
 
 .inputForm {
@@ -211,6 +223,10 @@ input {
     background: rgba(0,0,255, 0.5);
 }
 
+#posicoes {
+    color: #ccc;
+}
+
 .botao {
     font-size: 1.2rem;
     margin-top: 10px;
@@ -219,7 +235,7 @@ input {
     border-radius: 8px;
     cursor: pointer;
     color: #fff;
-    border: 1px solid #ccc;
+    border: 1px solid #333;
     font-weight: bold;
 }
 
@@ -340,7 +356,7 @@ input {
 }
 
 .modal > div {
-    width: 300px;
+    width: 400px;
     position: relative;
     margin: 10% auto;
     border-radius: 8px;

@@ -51,16 +51,16 @@
                 <button class='botao' id='btnJogar'>Jogar</button>
             </div>
             <p id='posicoes'>
-                Lat.: <span id='posicaoY'></span> Lon.: <span id='posicaoX'></span>
-                <p><button class='botao' id='btnMoverLinhas'>90°N 180°W</button></p>
+                y: <span id='posicaoY'></span> x: <span id='posicaoX'></span>
+                <!-- <p><button class='botao' id='btnMoverLinhas'>90°N 180°W</button></p> -->
             </p>
         </div>
         <h3>Missões</h3>
         <div id='missoes'>
-            <p><button class='botao missoes' id='btnMissao1'>1</button></p>
-            <p><button class='botao missoes' id='btnMissao2'>2</button></p>
-            <p><button class='botao missoes' id='btnMissao3'>3</button></p>
-            <p><button class='botao missoes' id='btnMissao4'>4</button></p>
+            <button class='botao missoes' id='btnMissao1'>1</button>
+            <button class='botao missoes' id='btnMissao2'>2</button>
+            <button class='botao missoes' id='btnMissao3'>3</button>
+            <button class='botao missoes' id='btnMissao4'>4</button>
         </div>
     </aside>
 
@@ -75,7 +75,7 @@
 
         <div id='card' class='cards'>
             <h4>Instrução</h4>
-            <p>Nos Oceanos e Mares temos navios Comerciais, Militares e de Turismo. Mas, também temos navios que praticam a Pesca Ilegal e a Pirataria.</p>
+            <p>Nos Oceanos e Mares temos navios <img class="icone-menor" src="images/icon-comercial.png" alt="Comercial" /> Comerciais, <img class="icone-menor" src="images/icon-militar.png" alt="militar" /> Militares e de <img class="icone-menor" src="images/icon-turismo.png" alt="turismo" /> Turismo. Mas, também temos navios que praticam a <img class="icone-menor" src="images/icon-pesca.png" alt="Pesca Ilegal" /> Pesca Ilegal e a <img class="icone-menor" src="images/icon-pirataria.png" alt="Pirataria" /> Pirataria.</p>
             <p>Escolha uma missão e use as Coordenadas Geográficas para localizar os navios de Pesca Ilegal e de Pirataria.</p>
             <p>Saudações Geográficas e até a próxima missão!</p>
         </div>
@@ -91,6 +91,58 @@
             <a href="#fechar" title="Fechar" class="fechar">x</a>
             <h3>Coordenada</h3>
             <p id='coordenadasDaJogada'></p>
+        </div>
+    </div>
+
+    <!-- MISSAO 1 -->
+    <div id='cardMissao1' class='modal'>
+        <div>
+            <a href="#fechar" title="Fechar" class="fechar">x</a>
+            <h3>Missão 1 - Green</h3>
+            <h4>Atlântico e Pacífico Norte</h4>
+            <p id='textoMissao1'>
+                Em águas do Atlântico Norte e do Pacífio Norte na direção Oeste existem relatos que tem 4 navios praticando pirataria e pesca ilegal. <br>
+                Ajude a localiza-los. Digite as coordenadas Geográficas para inspecionarmos os navios que estão nestas áreas do Globo Terrestre.
+            </p>
+        </div>
+    </div>
+
+    <!-- MISSAO 2 -->
+    <div id='cardMissao2' class='modal'>
+        <div>
+            <a href="#fechar" title="Fechar" class="fechar">x</a>
+            <h3>Missão 2 - Orange</h3>
+            <h4>Oceanos e Mares ao Leste e ao Norte</h4>
+            <p id='texoMissao2'>
+                Nas águas os oceanos e mares no leste e norte da Terra existem denúncias da existência de dois navios, um praticando Pesca Ilegal e outro Pirataria. <br>
+                Ajude a localiza-los. Passe as coordenadas Geográficas para inspecionarmos os navios que estão nestas áreas do Globo Terrestre.
+            </p>
+        </div>
+    </div>
+
+    <!-- MISSAO 3 -->
+    <div id='cardMissao3' class='modal'>
+        <div>
+            <a href="#fechar" title="Fechar" class="fechar">x</a>
+            <h3>Missão 3 - Gold</h3>
+            <h4>Atlântico e Pacífico Sul</h4>
+            <p id='textoMissao3'>
+                Conforme denúncias nas águas os oceanos no Sudoeste Terra estão dois navios, um praticando Pesca Ilegal e outro Pirataria. <br>
+                Ajude a localiza-los. Passe as coordenadas Geográficas para inspecionarmos os navios que estão nestas áreas do Globo Terrestre.
+            </p>
+        </div>
+    </div>
+
+    <!-- MISSAO 4 -->
+    <div id='cardMissao4' class='modal'>
+        <div>
+            <a href="#fechar" title="Fechar" class="fechar">x</a>
+            <h3>Missão 4 - Purple</h3>
+            <h4>Do Atlântico Sul, para o Índico e Pacífico Sul no rumo leste</h4>
+            <p id='cardMissao4'>
+                A inteligência repassou informações sobre a presença de dois navios, um praticando Pesca Ilegal e outro Pirataria. <br>
+                Ajude a localiza-los. Passe as coordenadas Geográficas para inspecionarmos os navios que estão nestas áreas do Globo Terrestre.
+            </p>
         </div>
     </div>
 
