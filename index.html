@@ -28,6 +28,7 @@
                     <input
                         id='latitudeInformada'
                         type="number" min='0' max='90' step='5'
+                        onBlur='validaLatitude(this.value)'
                         autofocus
                     />
                     <select name="dirLatitude" id="dirLatitude">
@@ -42,6 +43,7 @@
                     <input
                         id='longitudeInformada'
                         type="number" min='0' max='180' step='5'
+                        onBlur='validaLongitude(this.value)'
                     />
                     <select name="dirLongitude" id="dirLongitude">
                         <option value="E">E - Leste</option>

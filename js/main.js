@@ -279,3 +279,19 @@ desenharIcone(356, 920, 'pirataria')  // 40
 desenharIcone(498, 873, 'pesca')  // 49
 ////
 */
+
+function validaLatitude(la) {
+	if(la < 0 || la > 90) {
+		alert('digite uma latitude válida!')
+		latitudeInformada.value = 0
+		return
+	}
+}
+
+function validaLongitude(lo) {
+	if(lo < 0 || lo > 180) {
+		alert('digite uma longitude válida!')
+		longitudeInformada.value = 0
+		return
+	}
+}
