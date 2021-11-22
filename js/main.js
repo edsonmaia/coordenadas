@@ -144,7 +144,7 @@ function moverConformeDirecao(latitudeInformada, longitudeInformada, dirLatitude
 	indiceLa = obterIndiceLatitude(latitudeInformada)
 	indiceLo = obterIndiceLongitude(longitudeInformada, dirLongitude)
 
-	dirLatitude == 'N' ? nLatitude = ((equador-5) - latitudeInformada*indiceLa) : nLatitude = ((equador-5) + latitudeInformada*indiceLa)
+	dirLatitude == 'N' ? nLatitude = ((322) - latitudeInformada*indiceLa) : nLatitude = ((322) + latitudeInformada*indiceLa)
 	dirLongitude == 'E' ? nLongitude = (greenwich + longitudeInformada*indiceLo) : nLongitude = (greenwich - longitudeInformada*indiceLo)
 }
 
