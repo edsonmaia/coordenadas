@@ -179,11 +179,11 @@ function desenharNavio(top, left, cor) {
 //desenharIcone(195, 587, 'turismo')
 
 // NAVIOS latitude, longitude, cor
-
+// equador 327
 // ATLANTICO
-desenharNavio(equador, greenwich, 'green') // 0 NAVIO CENTRAL
+desenharNavio(327, greenwich, 'green') // 0 NAVIO CENTRAL
 // NAVIO OESTE ATLANTICO
-desenharNavio(equador, 585, 'green') // 1
+desenharNavio(327, 585, 'green') // 1
 
 // NORTE OESTE ATLANTICO N
 desenharNavio(305, 587, 'green') // 2
@@ -196,7 +196,7 @@ desenharNavio(163, 634, 'green') // 8
 desenharNavio(127, 539, 'green') // 9 EXTRA
 
 // NORTE OESTE PACIFICO N
-desenharNavio(equador, 299, 'green') // 10 * pi
+desenharNavio(327, 299, 'green') // 10 * pi
 desenharNavio(305, 443, 'green') // 11
 desenharNavio(278, 301, 'green') // 12
 desenharNavio(250, 395, 'green') // 13
@@ -204,8 +204,8 @@ desenharNavio(224, 349, 'green') // 14 * pe
 desenharNavio(196, 301, 'green') // 15
 
 ////////////////
-desenharNavio(equador, 873, 'orange')  // 16 NAVIO LESTE INDICO
-desenharNavio(equador, 1062, 'orange') // 17 NAVIO LESTE PACIFICO
+desenharNavio(327, 873, 'orange')  // 16 NAVIO LESTE INDICO
+desenharNavio(327, 1062, 'orange') // 17 NAVIO LESTE PACIFICO
 // NORTE LESTE 'MARES' + INDICO E PACIFICO
 desenharNavio(305, 825, 'orange')  // 18 INDICO NORTE * pi
 desenharNavio(305, 968, 'orange')  // 19 PACIFICO NORTE
