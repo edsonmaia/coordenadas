@@ -296,15 +296,37 @@ input:hover, input:focus, select:hover, select:focus, button:hover, button:focus
 #placar {
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: space-between;
     padding-top: 10px;
+    gap: 5px;
 }
 
-#placar figure {
+/*  */
+.iconesPlacar {
     display: flex;
-    align-items: center;
-    gap: 5px;
-    margin-bottom: 5px;
+}
+
+/* cada icone no placar */
+.iconesPlacar div {
+    width: 35px;
+    height: 35px;
+}
+
+.iconePesca {
+    background: url('../images/icon-pesca.png') no-repeat;
+}
+
+.iconePirataria {
+    background: url('../images/icon-pirataria.png') no-repeat;
+}
+
+.iconePescaGreen {
+    background: url('../images/icon-pesca-verde.png') no-repeat;
+}
+
+.iconePiratariaGreen {
+    background: url('../images/icon-pirataria-verde.png') no-repeat;
 }
 
 .cards {
@@ -400,9 +422,5 @@ input:hover, input:focus, select:hover, select:focus, button:hover, button:focus
     background: #ff4545;
     border-radius: 50%;
     font-size: 1.25rem;
-    color: #fff;
-}
-
-#pontoPirataria, #pontoPesca {
     color: #fff;
 }

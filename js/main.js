@@ -32,16 +32,13 @@ function verificarFirefox() {
     // verificar se e o Firefox
     var browser
 	var sUsrAg = navigator.userAgent
-    if(sUsrAg.indexOf("Firefox") > -1) {
-        return browser = "Firefox"
-    }
+    if(sUsrAg.indexOf("Firefox") > -1) return browser = "Firefox"
 }
 
 let equador = (window.innerHeight)/2
 // verifica se e o firefox se for adiciona +5 na medida do equador
 let isFirefox = verificarFirefox()
 isFirefox == 'Firefox' ? equador = (window.innerHeight+2.5)/2 : equador = window.innerHeight/2
-
 let greenwich = window.innerWidth/2
 
 let posicaoY = document.querySelector('#posicaoY')
@@ -56,14 +53,13 @@ const pegarPosicao = mapa.addEventListener('click', (evento) => {
     return posicaoDoClique
 })
 
-function mudarLatitude(posY, dLa) {
+function mudarLatitude(posY) {
 	let firefox = verificarFirefox()
 	let posicao = (posY+7)
 	firefox == 'Firefox' ? linhaDeLatitude.style.top = posicao+"px"	: linhaDeLatitude.style.top = posY+"px"
-	let dirLat = dLa
 }
 
-function mudarLongitude(posX, dLo) {
+function mudarLongitude(posX) {
 	let firefox = verificarFirefox()
 	let posicao = ''
 	if(firefox == 'Firefox') {
@@ -73,7 +69,6 @@ function mudarLongitude(posX, dLo) {
 		posicao = (posX+12.5)
 		linhaDeLongitude.style.left = posicao+"px"
 	}
-	let dirLon = dLo
 }
 
 const btnJogar = document.querySelector('#btnJogar').addEventListener('click', () => {
@@ -85,8 +80,8 @@ const btnJogar = document.querySelector('#btnJogar').addEventListener('click', (
 
 	moverConformeDirecao(latitudeInformada, longitudeInformada, dirLatitude, dirLongitude)
 
-    mudarLatitude(nLatitude, dirLatitude)
-	mudarLongitude(nLongitude, dirLongitude)
+    mudarLatitude(nLatitude)
+	mudarLongitude(nLongitude)
 
 	//abrirModal(latitudeInformada, dirLatitude, longitudeInformada, dirLongitude)
 	verificarNavio(latitudeInformada, longitudeInformada, dirLatitude, dirLongitude)
@@ -141,7 +136,6 @@ let nLatitude  = ''
 let nLongitude = ''
 
 function moverConformeDirecao(latitudeInformada, longitudeInformada, dirLatitude, dirLongitude) {
-
 	indiceLa = obterIndiceLatitude(latitudeInformada)
 	indiceLo = obterIndiceLongitude(longitudeInformada, dirLongitude)
 
@@ -167,22 +161,17 @@ function desenharNavio(top, left, cor) {
 	// verifica se e o firefox se for adiciona +5 na medida do equador
 	let firefox = verificarFirefox()
 
-	if(firefox == 'Firefox') {
-		navio.style.top = (top-9)+'px'
-	} else {
-		navio.style.top = (top-11)+'px'
-	}
-	
+	firefox == 'Firefox' ? navio.style.top = (top-9)+'px' : navio.style.top = (top-11)+'px'
 	navio.style.left = (left)+'px'
 }
 
-// ICONES latitude, longitude, tipo
+// ICONES latitude, longitude, tipo Exemplo
 //desenharIcone(195, 587, 'turismo')
 
 // NAVIOS latitude, longitude, cor
 // equador 327
 // ATLANTICO
-desenharNavio(327, greenwich, 'green') // 0 NAVIO CENTRAL
+desenharNavio(327, 683, 'green') // 0 NAVIO CENTRAL
 // NAVIO OESTE ATLANTICO
 desenharNavio(327, 585, 'green') // 1
 
@@ -190,9 +179,9 @@ desenharNavio(327, 585, 'green') // 1
 desenharNavio(305, 587, 'green') // 2
 desenharNavio(277, 538, 'green') // 3 * pi
 desenharNavio(249, 634, 'green') // 4 * pe
-desenharNavio(210, greenwich, 'green') // 5
+desenharNavio(210, 683, 'green') // 5
 desenharNavio(195, 587, 'green') // 6
-desenharNavio(162, greenwich, 'green') // 7
+desenharNavio(162, 683, 'green') // 7
 desenharNavio(163, 634, 'green') // 8
 desenharNavio(127, 539, 'green') // 9 EXTRA
 
@@ -221,12 +210,12 @@ desenharNavio(80, 873, 'orange')   // 27 * pe
 
 // SUL OESTE ATLANTICO SUL
 desenharNavio(357, 633, 'gold') // 28
-desenharNavio(385, greenwich, 'gold') // 29
+desenharNavio(385, 683, 'gold') // 29
 desenharNavio(384, 586, 'gold') // 30
 desenharNavio(412, 634, 'gold') // 31 * pi
 desenharNavio(439, 538, 'gold') // 32
 desenharNavio(467, 538, 'gold') // 33
-desenharNavio(535, greenwich, 'gold') // 34
+desenharNavio(535, 683, 'gold') // 34
 
 // SUL OESTE PACIFICO SUL
 desenharNavio(356, 491, 'gold') // 35
@@ -248,14 +237,6 @@ desenharNavio(438, 968, 'purple')  // 46
 desenharNavio(438, 1112, 'purple') // 47
 desenharNavio(467, 1063, 'purple') // 48
 desenharNavio(498, 873, 'purple')  // 49 * pe
-
-/*
-desenharIcone(equador, 300, 'comercial')
-desenharIcone(equador, 400, 'militar')
-desenharIcone(equador, 500, 'turismo')
-desenharIcone(equador, 600, 'pirataria')
-desenharIcone(equador, 700, 'pesca')
-*/
 
 function exibirCard() {
     let divisoria = document.createElement('div')
@@ -279,8 +260,8 @@ function validaLongitude(lo) {
 	}
 }
 
-// CONST SHIPS
-const ships = [
+// array de SHIPS
+let ships = [
     // Atlantico e Pacifico Norte W
     {
         id: 0,
@@ -789,35 +770,34 @@ const ships = [
 ]
 //// CONST SHIPS
 // Green(2), Orange(1), Gold(1), Purple
-const shipsFish = [4, 14, 27, 38, 49]
-// Green(2), Orange(1), Gold(1), Purple
-const shipsPirate = [3, 10, 18, 31, 40]
+//let shipsFish = [4, 14, 27, 38, 49]
+//let shipsPirate = [3, 10, 18, 31, 40]
+
 const shipsComercial = []
 const shipsTurism = []
 const militare = []
-
 
 function verificarNavio(latitudeInformada, longitudeInformada, dirLatitude, dirLongitude) {
 	let latitude  = latitudeInformada+dirLatitude
 	let longitude = longitudeInformada+dirLongitude
 	
 	// verificar se e ilegal ou nao
-	for(let i = 0; i <= 49; i++) {
+	for(let i = 0; i < ships.length; i++) {
 		if(latitude == ships[i].lat && longitude == ships[i].long) {
 			desenharIcone(ships[i].y, ships[i].x, ships[i].tipo)
-
-			//navioIlegalEncontrado(ships[i].id)
 
 			let tipo = ships[i].tipo
 			switch(tipo) {
 				case 'pesca':
-					alert('Navio de Pesca Ilegal')
+					//alert('Navio de Pesca Ilegal')
 					// pontuar
+                    navioIlegalEncontrado(ships[i].id)
 					break
 
 				case 'pirataria':
-					alert('Navio de Pirataria')
+					//alert('Navio de Pirataria')
 					// pontuar
+                    navioIlegalEncontrado(ships[i].id)
 					break
 				
 				case 'comercial':
@@ -836,31 +816,60 @@ function verificarNavio(latitudeInformada, longitudeInformada, dirLatitude, dirL
 					break
 				}
 		} // fim if
-
-	}
+        
+	}  // fim for
 		
 } // fim verificarNavio
 
-let spanPirataria = document.querySelector('#pontoPirataria')
-let spanPesca = document.querySelector('#pontoPesca')
-let pontosPirataria = 0
-let pontosPesca = 0
-
-/*
+// MELHORAR A IMPLEMENTACAO DESTA FUNCIONALIDADE PARA O PLACAR
 function navioIlegalEncontrado(numero) {
 	let n = numero
 	// pegar indice do numero no array
-
-	// fazer splice (apagar) do array se encontrar
+    
 	if (n == ships[numero].id && ships[numero].tipo == 'pesca') {
-		shipsFish.splice(numero, 1)
-		pontosPesca += 1
-		spanPesca.textContent = pontosPesca
+		//buscarNoArray(ships, numero)
+        //alert('Pesca ' + n)
+        // mudar estilo do icone
+        atualizarPlacar(numero)
 	}
 	if (n == ships[numero].id && ships[numero].tipo == 'pirataria') {
-		shipsPirate.splice(numero, 1)
-		pontosPirataria += 1
-		spanPirataria.textContent = pontosPirataria
-	}
+        //buscarNoArray(ships, numero)
+        //alert('Pirataria ' + n)
+        // mudar estilo do icone
+        atualizarPlacar(numero)
+	}    
+
+}
+
+/*
+let naviosEncontrados = []
+function buscarNoArray(array, numero) {
+    let valor = array[numero].id
+    alert(valor)
+    //alert("Navio " + valor + " na posição " + posicao)
+    //naviosEncontrados.push(valor)
 }
 */
+
+// SELECIONAR TODOS OS ICONES de Pesca
+let iconesPesca = document.querySelectorAll('.iconePesca')
+
+// SELECIONAR TODOS OS ICONES de Pirataria
+let iconesPirataria = document.querySelectorAll('.iconePirataria')
+
+function atualizarPlacar(numero) {
+    for(let a = 0; a <= 4; a++) {
+        if(numero == iconesPesca[a].dataset.id) {
+            //alert(iconesPesca[a].dataset.id)
+            iconesPesca[a].classList.remove('iconePesca')
+            iconesPesca[a].classList.add('iconePescaGreen')
+        }
+    }
+    for(let b = 0; b <= 4; b++) {
+        if(numero == iconesPirataria[b].dataset.id) {
+            //alert(iconesPirataria[b].dataset.id)
+            iconesPirataria[b].classList.remove('iconePirataria')
+            iconesPirataria[b].classList.add('iconePiratariaGreen')
+        }
+    }
+}
