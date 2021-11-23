@@ -792,9 +792,10 @@ const ships = [
 const shipsFish = [4, 14, 27, 38, 49]
 // Green(2), Orange(1), Gold(1), Purple
 const shipsPirate = [3, 10, 18, 31, 40]
-const shipsComercial = [ ]
-const shipsTurism = [ ]
-const militare = [ ]
+const shipsComercial = []
+const shipsTurism = []
+const militare = []
+
 
 function verificarNavio(latitudeInformada, longitudeInformada, dirLatitude, dirLongitude) {
 	let latitude  = latitudeInformada+dirLatitude
@@ -804,6 +805,9 @@ function verificarNavio(latitudeInformada, longitudeInformada, dirLatitude, dirL
 	for(let i = 0; i <= 49; i++) {
 		if(latitude == ships[i].lat && longitude == ships[i].long) {
 			desenharIcone(ships[i].y, ships[i].x, ships[i].tipo)
+
+			//navioIlegalEncontrado(ships[i].id)
+
 			let tipo = ships[i].tipo
 			switch(tipo) {
 				case 'pesca':
@@ -830,10 +834,33 @@ function verificarNavio(latitudeInformada, longitudeInformada, dirLatitude, dirL
 					//alert('Navio Militar')
 					// pontuar
 					break
-			
 				}
 		} // fim if
 
 	}
 		
 } // fim verificarNavio
+
+let spanPirataria = document.querySelector('#pontoPirataria')
+let spanPesca = document.querySelector('#pontoPesca')
+let pontosPirataria = 0
+let pontosPesca = 0
+
+/*
+function navioIlegalEncontrado(numero) {
+	let n = numero
+	// pegar indice do numero no array
+
+	// fazer splice (apagar) do array se encontrar
+	if (n == ships[numero].id && ships[numero].tipo == 'pesca') {
+		shipsFish.splice(numero, 1)
+		pontosPesca += 1
+		spanPesca.textContent = pontosPesca
+	}
+	if (n == ships[numero].id && ships[numero].tipo == 'pirataria') {
+		shipsPirate.splice(numero, 1)
+		pontosPirataria += 1
+		spanPirataria.textContent = pontosPirataria
+	}
+}
+*/

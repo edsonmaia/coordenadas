@@ -402,3 +402,7 @@ input:hover, input:focus, select:hover, select:focus, button:hover, button:focus
     font-size: 1.25rem;
     color: #fff;
 }
+
+#pontoPirataria, #pontoPesca {
+    color: #fff;
+}
