@@ -22,7 +22,6 @@ const btnMissao2 = document.querySelector('#btnMissao2').addEventListener('click
 const btnMissao3 = document.querySelector('#btnMissao3').addEventListener('click', () => abrirMissao(3))
 const btnMissao4 = document.querySelector('#btnMissao4').addEventListener('click', () => abrirMissao(4))
 
-
 /*
 const fecharModal = document.querySelector('.fechar').addEventListener('click', () => {
 	location.href="#"
@@ -77,28 +76,30 @@ function mudarLongitude(posX, dLo) {
 	let dirLon = dLo
 }
 
-/*
-const btnMoverLinhas = document.querySelector('#btnMoverLinhas').addEventListener("click", () => {
-    mudarLatitude(55, "N")
-    mudarLongitude(255, "E")
-})
-*/
-
 const btnJogar = document.querySelector('#btnJogar').addEventListener('click', () => {
     /* INPUTS */
-    const latitudeInformada  = document.querySelector('#latitudeInformada').value
-    const longitudeInformada = document.querySelector('#longitudeInformada').value
-    const dirLatitude  = document.querySelector('#dirLatitude').value
-    const dirLongitude = document.querySelector('#dirLongitude').value
+    let latitudeInformada  = document.querySelector('#latitudeInformada').value
+    let longitudeInformada = document.querySelector('#longitudeInformada').value
+    let dirLatitude  = document.querySelector('#dirLatitude').value
+    let dirLongitude = document.querySelector('#dirLongitude').value
 
 	moverConformeDirecao(latitudeInformada, longitudeInformada, dirLatitude, dirLongitude)
 
     mudarLatitude(nLatitude, dirLatitude)
 	mudarLongitude(nLongitude, dirLongitude)
 
-	abrirModal(latitudeInformada, dirLatitude, longitudeInformada, dirLongitude)
+	//abrirModal(latitudeInformada, dirLatitude, longitudeInformada, dirLongitude)
+	verificarNavio(latitudeInformada, longitudeInformada, dirLatitude, dirLongitude)
 
+	limparNumeros() // zerar numeros de latitude e longitude
 })
+
+function limparNumeros() {
+	document.querySelector('#latitudeInformada').value = 0
+	document.querySelector('#longitudeInformada').value = 0
+	document.querySelector('#dirLatitude').value = 'N'
+	document.querySelector('#dirLongitude').value = 'E'
+}
 
 function obterIndiceLatitude(latitudeInformada) {
 		// indice usado para mover a div para o Norte (-) ou para o Sul (+)
@@ -154,7 +155,7 @@ function desenharIcone(top, left, tipo) {
 	icone.setAttribute('src', `images/icon-${tipo}.png`)
 	icone.classList.add('icones')
 	icone.style.top = (top-12.5)+'px'
-	icone.style.left = (left)+'px'
+	icone.style.left = (left-12.5)+'px'
 }
 
 function desenharNavio(top, left, cor) {
@@ -262,24 +263,6 @@ function exibirCard() {
     divisoria.innerHTML = 'Caixa descritiva'
 }
 
-/*
-// ICONs
-desenharIcone(277, 538, 'pirataria') // 3
-desenharIcone(249, 634, 'pesca') // 4
-desenharIcone(equador, 299, 'pirataria') // 10
-desenharIcone(224, 349, 'pesca') // 14
-
-desenharIcone(305, 825, 'pirataria')  // 18
-desenharIcone(80, 873, 'pesca')  // 27
-
-desenharIcone(412, 634, 'pirataria') // 31
-desenharIcone(439, 349, 'pesca') // 38
-
-desenharIcone(356, 920, 'pirataria')  // 40
-desenharIcone(498, 873, 'pesca')  // 49
-////
-*/
-
 function validaLatitude(la) {
 	if(la < 0 || la > 90) {
 		alert('digite uma latitude válida!')
@@ -295,3 +278,562 @@ function validaLongitude(lo) {
 		return
 	}
 }
+
+// CONST SHIPS
+const ships = [
+    // Atlantico e Pacifico Norte W
+    {
+        id: 0,
+        color: 'green',
+        lat : '0N',
+        long: '0W',
+        y: 320,
+        x: 696,
+        tipo: 'comercial',
+        local: 'Atlântico Norte Oeste'
+    },
+    {
+        id: 1,
+        color: 'green',
+        lat : '0N',
+        long: '40W',
+        y: 320,
+        x: 599,
+        tipo: 'turismo',
+        local: 'Atlântico Norte Oeste'
+    },
+    {
+        id: 2,
+        color: 'green',
+        lat : '10N',
+        long: '40W',
+        y: 298,
+        x: 599,
+        tipo: 'militar',
+        local: 'Atlântico Norte Oeste'
+    },
+    {
+        id: 3,
+        color: 'green',
+        lat : '20N',
+        long: '60W',
+        y: 269,
+        x: 550,
+        tipo: 'pirataria',
+        local: 'Atlântico Norte Oeste'
+    },
+    {
+        id: 4,
+        color: 'green',
+        lat : '30N',
+        long: '20W',
+        y: 242,
+        x: 647,
+        tipo: 'pesca',
+        local: 'Atlântico Norte Oeste'
+    },
+    {
+        id: 5,
+        color: 'green',
+        lat : '45N',
+        long: '0W',
+        y: 202,
+        x: 696,
+        tipo: 'turismo',
+        local: 'Atlântico Norte Oeste'
+    },
+    {
+        id: 6,
+        color: 'green',
+        lat : '50N',
+        long: '40W',
+        y: 188,
+        x: 599,
+        tipo: 'comercial',
+        local: 'Atlântico Norte Oeste'
+    },
+    {
+        id: 7,
+        color: 'green',
+        lat : '60N',
+        long: '0W',
+        y: 155,
+        x: 696,
+        tipo: 'militar',
+        local: 'Atlântico Norte Oeste'
+    },
+    {
+        id: 8,
+        color: 'green',
+        lat : '60N',
+        long: '20W',
+        y: 155,
+        x: 647,
+        tipo: 'comercial',
+        local: 'Atlântico Norte Oeste'
+    },
+    {
+        id: 9,
+        color: 'green',
+        lat : '70N',
+        long: '60W',
+        y: 119,
+        x: 552,
+        tipo: 'turismo',
+        local: 'Atlântico Norte Oeste'
+    },
+    {
+        id: 10,
+        color: 'green',
+        lat : '0N',
+        long: '160W',
+        y: 323,
+        x: 314,
+        tipo: 'pirataria',
+        local: 'Pacífico Norte Oeste'
+    },
+    {
+        id: 11,
+        color: 'green',
+        lat : '10N',
+        long: '100W',
+        y: 299,
+        x: 457,
+        tipo: 'comercial',
+        local: 'Pacífico Norte Oeste'
+    },
+    {
+        id: 12,
+        color: 'green',
+        lat : '20N',
+        long: '160W',
+        y: 271,
+        x: 314,
+        tipo: 'turismo',
+        local: 'Pacífico Norte Oeste'
+    },
+    {
+        id: 13,
+        color: 'green',
+        lat : '30N',
+        long: '120W',
+        y: 244,
+        x: 409,
+        tipo: 'militar',
+        local: 'Pacífico Norte Oeste'
+    },
+    {
+        id: 14,
+        color: 'green',
+        lat : '40N',
+        long: '140W',
+        y: 218,
+        x: 362,
+        tipo: 'pesca',
+        local: 'Pacífico Norte Oeste'
+    },
+    {
+        id: 15,
+        color: 'green',
+        lat : '50N',
+        long: '160W',
+        y: 189,
+        x: 314,
+        tipo: 'comercial',
+        local: 'Pacífico Norte Oeste'
+    },
+    // Oceanos e Mares do Norte para o Leste    
+    {
+        id: 16,
+        color: 'orange',
+        lat : '0N',
+        long: '80E',
+        y: 323,
+        x: 886,
+        tipo: 'militar',
+        local: 'Índico'
+    },
+    {
+        id: 17,
+        color: 'orange',
+        lat : '0N',
+        long: '160E',
+        y: 323,
+        x: 1077,
+        tipo: 'turismo',
+        local: 'Pacífico Norte, Mares do Norte'
+    },
+    {
+        id: 18,
+        color: 'orange',
+        lat : '10N',
+        long: '60E',
+        y: 299,
+        x: 838,
+        tipo: 'pirataria',
+        local: 'Índico'
+    },
+    {
+        id: 19,
+        color: 'orange',
+        lat : '10N',
+        long: '120E',
+        y: 299,
+        x: 982,
+        tipo: 'comercial',
+        local: 'Pacífico Norte Leste'
+    },
+    {
+        id: 20,
+        color: 'orange',
+        lat : '20N',
+        long: '40E',
+        y: 271,
+        x: 790,
+        tipo: 'comercial',
+        local: 'Mares do Norte - Mar Vermelho'
+    },
+    {
+        id: 21,
+        color: 'orange',
+        lat : '30N',
+        long: '20E',
+        y: 244,
+        x: 743,
+        tipo: 'turismo',
+        local: 'Mares do Norte - Mar Mediterrâneo'
+    },
+    {
+        id: 22,
+        color: 'orange',
+        lat : '30N',
+        long: '160E',
+        y: 244,
+        x: 1077,
+        tipo: 'militar',
+        local: 'Pacífico Norte Leste'
+    },
+    {
+        id: 23,
+        color: 'orange',
+        lat : '40N',
+        long: '20E',
+        y: 218,
+        x: 743,
+        tipo: 'turismo',
+        local: 'Mares do Norte - Mar Mediterrâneo'
+    },
+    {
+        id: 24,
+        color: 'orange',
+        lat : '40N',
+        long: '140E',
+        y: 218,
+        x: 1029,
+        tipo: 'turismo',
+        local: 'Pacífico Norte Leste'
+    },
+    {
+        id: 25,
+        color: 'orange',
+        lat : '70N',
+        long: '20E',
+        y: 121,
+        x: 743,
+        tipo: 'comercial',
+        local: 'Mares do Norte'
+    },
+    {
+        id: 26,
+        color: 'orange',
+        lat : '80N',
+        long: '40E',
+        y: 74,
+        x: 790,
+        tipo: 'militar',
+        local: 'Mares do Norte'
+    },
+    {
+        id: 27,
+        color: 'orange',
+        lat : '80N',
+        long: '80E',
+        y: 74,
+        x: 886,
+        tipo: 'pesca',
+        local: 'Mares do Norte'
+    },
+    // Atlantico e Pacifico Sul Oeste
+    {
+        id: 28,
+        color: 'gold',
+        lat : '10S',
+        long: '20W',
+        y: 351,
+        x: 647,
+        tipo: 'comercial',
+        local: 'Atlântico Sul Oeste'
+    },
+    {
+        id: 29,
+        color: 'gold',
+        lat : '20S',
+        long: '0W',
+        y: 379,
+        x: 696,
+        tipo: 'militar',
+        local: 'Atlântico Sul Oeste'
+    },
+    {
+        id: 30,
+        color: 'gold',
+        lat : '20S',
+        long: '40W',
+        y: 379,
+        x: 599,
+        tipo: 'turismo',
+        local: 'Atlântico Sul Oeste'
+    },
+    {
+        id: 31,
+        color: 'gold',
+        lat : '30S',
+        long: '20W',
+        y: 406,
+        x: 647,
+        tipo: 'pirataria',
+        local: 'Atlântico Sul Oeste'
+    },
+    {
+        id: 32,
+        color: 'gold',
+        lat : '40S',
+        long: '60W',
+        y: 433,
+        x: 552,
+        tipo: 'turismo',
+        local: 'Atlântico Sul Oeste'
+    },
+    {
+        id: 33,
+        color: 'gold',
+        lat : '50S',
+        long: '60W',
+        y: 462,
+        x: 552,
+        tipo: 'comercial',
+        local: 'Atlântico Sul Oeste'
+    },
+    {
+        id: 34,
+        color: 'gold',
+        lat : '70S',
+        long: '0W',
+        y: 530,
+        x: 696,
+        tipo: 'militar',
+        local: 'Atlântico Sul Oeste'
+    },
+    // Pacifico Sul W
+    {
+        id: 35,
+        color: 'gold',
+        lat : '10S',
+        long: '80W',
+        y: 351,
+        x: 505,
+        tipo: 'turismo',
+        local: 'Pacífico Sul Oeste'
+    },
+    {
+        id: 36,
+        color: 'gold',
+        lat : '20S',
+        long: '100W',
+        y: 379,
+        x: 457,
+        tipo: 'comercial',
+        local: 'Pacífico Sul Oeste'
+    },
+    {
+        id: 37,
+        color: 'gold',
+        lat : '20S',
+        long: '150W',
+        y: 379,
+        x: 337,
+        tipo: 'militar',
+        local: 'Pacífico Sul Oeste'
+    },
+    {
+        id: 38,
+        color: 'gold',
+        lat : '40S',
+        long: '140W',
+        y: 433,
+        x: 362,
+        tipo: 'pesca',
+        local: 'Pacífico Sul Oeste'
+    },
+    {
+        id: 39,
+        color: 'gold',
+        lat : '60S',
+        long: '120W',
+        y: 494,
+        x: 409,
+        tipo: 'comercial',
+        local: 'Pacífico Sul Oeste'
+    },
+    // Indico, Pacifico Sul E
+    {
+        id: 40,
+        color: 'purple',
+        lat : '10S',
+        long: '100E',
+        y: 351,
+        x: 934,
+        tipo: 'pirataria',
+        local: 'Índico'
+    },
+    {
+        id: 41,
+        color: 'purple',
+        lat : '10S',
+        long: '140E',
+        y: 351,
+        x: 1029,
+        tipo: 'comercial',
+        local: 'Índico'
+    },
+    {
+        id: 42,
+        color: 'purple',
+        lat : '20S',
+        long: '60E',
+        y: 379,
+        x: 838,
+        tipo: 'turismo',
+        local: 'Índico'
+    },
+    {
+        id: 43,
+        color: 'purple',
+        lat : '30S',
+        long: '40E',
+        y: 406,
+        x: 790,
+        tipo: 'comercial',
+        local: 'Índico'
+    },
+    {
+        id: 44,
+        color: 'purple',
+        lat : '30S',
+        long: '160E',
+        y: 406,
+        x: 1077,
+        tipo: 'turismo',
+        local: 'Pacífico Sul Leste'
+    },
+    {
+        id: 45,
+        color: 'purple',
+        lat : '40S',
+        long: '20E',
+        y: 433,
+        x: 743,
+        tipo: 'militar',
+        local: 'Atlântico Sul Leste'
+    },
+    {
+        id: 46,
+        color: 'purple',
+        lat : '40S',
+        long: '120E',
+        y: 433,
+        x: 982,
+        tipo: 'militar',
+        local: 'Índico'
+    },
+    {
+        id: 47,
+        color: 'purple',
+        lat : '40S',
+        long: '180E',
+        y: 433,
+        x: 1124,
+        tipo: 'turismo',
+        local: 'Pacífico Sul Leste'
+    },
+    {
+        id: 48,
+        color: 'purple',
+        lat : '50S',
+        long: '160E',
+        y: 462,
+        x: 1077,
+        tipo: 'comercial',
+        local: 'Pacífico Sul Leste'
+    },
+    {
+        id: 49,
+        color: 'purple',
+        lat : '60S',
+        long: '80E',
+        y: 494,
+        x: 886,
+        tipo: 'pesca',
+        local: 'Índico'
+    }
+]
+//// CONST SHIPS
+// Green(2), Orange(1), Gold(1), Purple
+const shipsFish = [4, 14, 27, 38, 49]
+// Green(2), Orange(1), Gold(1), Purple
+const shipsPirate = [3, 10, 18, 31, 40]
+const shipsComercial = [ ]
+const shipsTurism = [ ]
+const militare = [ ]
+
+function verificarNavio(latitudeInformada, longitudeInformada, dirLatitude, dirLongitude) {
+	let latitude  = latitudeInformada+dirLatitude
+	let longitude = longitudeInformada+dirLongitude
+	
+	// verificar se e ilegal ou nao
+	for(let i = 0; i <= 49; i++) {
+		if(latitude == ships[i].lat && longitude == ships[i].long) {
+			desenharIcone(ships[i].y, ships[i].x, ships[i].tipo)
+			let tipo = ships[i].tipo
+			switch(tipo) {
+				case 'pesca':
+					alert('Navio de Pesca Ilegal')
+					// pontuar
+					break
+
+				case 'pirataria':
+					alert('Navio de Pirataria')
+					// pontuar
+					break
+				
+				case 'comercial':
+					//alert('Navio Comercial')
+					// pontuar
+					break
+				
+				case 'turismo':
+					//alert('Navio de Turismo')
+					// pontuar
+					break
+				
+				case 'militar':
+					//alert('Navio Militar')
+					// pontuar
+					break
+			
+				}
+		} // fim if
+
+	}
+		
+} // fim verificarNavio
