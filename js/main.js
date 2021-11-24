@@ -770,8 +770,8 @@ let ships = [
 ]
 //// CONST SHIPS
 // Green(2), Orange(1), Gold(1), Purple
-//let shipsFish = [4, 14, 27, 38, 49]
-//let shipsPirate = [3, 10, 18, 31, 40]
+let shipsFish = [4, 14, 27, 38, 49]
+let shipsPirate = [3, 10, 18, 31, 40]
 
 const shipsComercial = []
 const shipsTurism = []
@@ -841,15 +841,31 @@ function navioIlegalEncontrado(numero) {
 
 }
 
-/*
+
 let naviosEncontrados = []
+let quantNaviosEncontrados = 0
+let pontos = document.querySelector('#pontos')
+
 function buscarNoArray(array, numero) {
-    let valor = array[numero].id
-    alert(valor)
+    let valor = numero
+    let posicao = array.indexOf(valor)
+    //alert(valor)
     //alert("Navio " + valor + " na posição " + posicao)
-    //naviosEncontrados.push(valor)
+    if(naviosEncontrados.indexOf(valor) == -1) {
+        naviosEncontrados.push(valor)
+        quantNaviosEncontrados++
+        pontos.textContent = quantNaviosEncontrados
+    } else {
+        alert('Navio já foi encontrado')
+    }
+    fimDoJogo(naviosEncontrados.length)
 }
-*/
+
+function fimDoJogo(quantNaviosEncontrados) {
+    if(quantNaviosEncontrados >= 10) {
+        alert('Fim do Jogo! Parabéns, você localizou os 10 navios que estavam em práticas ilegais.')
+    }
+}
 
 // SELECIONAR TODOS OS ICONES de Pesca
 let iconesPesca = document.querySelectorAll('.iconePesca')
@@ -863,6 +879,7 @@ function atualizarPlacar(numero) {
             //alert(iconesPesca[a].dataset.id)
             iconesPesca[a].classList.remove('iconePesca')
             iconesPesca[a].classList.add('iconePescaGreen')
+            buscarNoArray(shipsFish, numero)
         }
     }
     for(let b = 0; b <= 4; b++) {
@@ -870,6 +887,7 @@ function atualizarPlacar(numero) {
             //alert(iconesPirataria[b].dataset.id)
             iconesPirataria[b].classList.remove('iconePirataria')
             iconesPirataria[b].classList.add('iconePiratariaGreen')
+            buscarNoArray(shipsPirate, numero)
         }
     }
 }
